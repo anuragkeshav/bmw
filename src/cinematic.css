@@ -1,0 +1,290 @@
+/* A warm-red ignition sequence, on the same editorial canvas. */
+.hero-pin[data-engine="open"] {
+  --engine-type-opacity: 0.12;
+}
+.hero-pin .car-viewport:not(.failed) {
+  top: 24%;
+  height: 60%;
+}
+.hero-pin[data-engine="open"] .hero-side-note {
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-pin .hero-side-note {
+  transition: opacity 0.65s var(--ease);
+}
+.hero-pin .scene-controls {
+  bottom: 11.8%;
+}
+.scene-actions {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: 17.7%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.scene-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 37px;
+  border: 1px solid #bdbdb1;
+  background: rgba(247, 247, 244, 0.84);
+  color: #34382e;
+  padding: 9px 13px;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.scene-actions button:hover {
+  background: #f5c7bd;
+  border-color: #b67c70;
+}
+.bonnet-hint {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #6b7063;
+  font-size: 11px;
+  letter-spacing: 0.015em;
+  padding-right: 12px;
+  border-right: 1px solid var(--line);
+  pointer-events: none;
+}
+.bonnet-hint > span:first-child {
+  color: var(--pink);
+  font-size: 17px;
+}
+.car-viewport:has(canvas:focus-visible)::after {
+  content: "Enter / Space: bonnet · P: pause effects";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  white-space: nowrap;
+  color: #3f4439;
+  background: var(--plaster);
+  padding: 6px 10px;
+  pointer-events: none;
+}
+.scene-actions .replay-intro {
+  border-color: transparent;
+  background: transparent;
+}
+.scene-actions .replay-intro:hover {
+  border-bottom-color: var(--pink);
+}
+.engine-caption {
+  position: absolute;
+  z-index: 5;
+  top: 53%;
+  left: var(--gutter);
+  width: 210px;
+  pointer-events: none;
+  animation: engine-caption-in 0.8s var(--ease) both;
+}
+.engine-caption > .furniture {
+  font-size: 8px;
+  color: #a33c32;
+  letter-spacing: 0.14em;
+}
+.engine-caption h2 {
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  margin-top: 15px;
+}
+.engine-caption h2 em {
+  display: block;
+}
+.engine-caption p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #5d5f51;
+  margin-top: 13px;
+}
+.engine-caption .engine-caption-note {
+  display: block;
+  color: #77796b;
+  font-size: 6.5px;
+  margin-top: 16px;
+  letter-spacing: 0.1em;
+}
+.ignition-sweep {
+  position: absolute;
+  inset: 14% 0 18%;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.ignition-sweep:after {
+  content: "";
+  position: absolute;
+  width: 16%;
+  height: 170%;
+  top: -35%;
+  left: -35%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(242, 185, 175, 0.3),
+    rgba(255, 241, 215, 0.6),
+    transparent
+  );
+  transform: skewX(-25deg);
+  filter: blur(18px);
+}
+.hero-pin[data-opening="playing"] .ignition-sweep {
+  opacity: 1;
+}
+.hero-pin[data-opening="playing"] .ignition-sweep:after {
+  animation: ignition-light 2.5s var(--ease) both;
+}
+.hero-pin[data-opening="playing"] .car-viewport canvas {
+  animation: ignition-arrival 1.3s var(--ease) both;
+}
+.hero-pin[data-opening="playing"] .replay-intro {
+  color: #a22f26;
+}
+@keyframes ignition-light {
+  from {
+    left: -35%;
+  }
+  to {
+    left: 120%;
+  }
+}
+@keyframes ignition-arrival {
+  from {
+    opacity: 0;
+    filter: brightness(1.7);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+@keyframes engine-caption-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (max-width: 1050px) {
+  .engine-caption {
+    top: 58%;
+    width: 160px;
+  }
+  .engine-caption h2 {
+    font-size: 28px;
+  }
+  .engine-caption p {
+    font-size: 10px;
+  }
+  .engine-caption .engine-caption-note {
+    max-width: 120px;
+  }
+}
+@media (max-width: 700px) {
+  .hero-pin .car-viewport:not(.failed) {
+    top: 36%;
+    height: 36%;
+  }
+  .hero-pin .scene-controls {
+    bottom: 11.7%;
+  }
+  .scene-actions {
+    bottom: 17.7%;
+    gap: 3px;
+    width: 100%;
+    padding: 0 12px;
+  }
+  .scene-actions button {
+    padding: 8px 9px;
+    font-size: 8.5px;
+    gap: 5px;
+    min-height: 38px;
+  }
+  .bonnet-hint {
+    font-size: 9px;
+    padding-right: 10px;
+    gap: 6px;
+  }
+  .bonnet-hint > span:first-child {
+    font-size: 13px;
+  }
+  .engine-caption {
+    top: auto;
+    bottom: 24.5%;
+    width: auto;
+  }
+  .engine-caption > .furniture {
+    font-size: 6px;
+  }
+  .engine-caption h2 {
+    font-size: 21px;
+    margin-top: 6px;
+  }
+  .engine-caption h2 em {
+    display: inline;
+  }
+  .engine-caption p {
+    font-size: 9px;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .engine-caption p br {
+    display: none;
+  }
+  .engine-caption .engine-caption-note {
+    display: none;
+  }
+  .hero-pin[data-engine="open"] .hero-edition {
+    bottom: 26%;
+  }
+}
+@media (max-width: 360px) {
+  .scene-actions button {
+    font-size: 7.5px;
+    padding: 8px 7px;
+  }
+  .engine-caption h2 {
+    font-size: 19px;
+  }
+  .engine-caption p {
+    max-width: 160px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ignition-sweep {
+    display: none;
+  }
+  .hero-pin[data-engine="open"] {
+    --engine-type-opacity: 0.12;
+  }
+  .hero-pin[data-engine="open"] .hero-type {
+    opacity: 0.12;
+  }
+  .scene-actions button {
+    transition: none;
+  }
+  .engine-caption,
+  .hero-pin[data-opening="playing"] .car-viewport canvas {
+    animation: none;
+  }
+}
